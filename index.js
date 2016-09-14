@@ -18,7 +18,7 @@ function SimpleDecorator(strategy, getComponent) {
  * @param {ContentBlock} block
  * @return {List<String>}
  */
-SimpleDecorator.prototype.getDecorations = function(block) {
+SimpleDecorator.prototype.getDecorations = function(contentState, block) {
     var decorations = Array(block.getText().length).fill(null);
     // Apply a decoration to given range, with given props
     function callback (start, end, props) {
@@ -37,7 +37,7 @@ SimpleDecorator.prototype.getDecorations = function(block) {
     var decorated = this.decorated;
     decorated[blockKey] = {};
 
-    this.strategy(block, callback);
+    this.strategy(contentState, block, callback);
 
     return Immutable.List(decorations);
 };
